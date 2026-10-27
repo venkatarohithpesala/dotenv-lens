@@ -58,11 +58,11 @@ describe('formatReport', () => {
       [
         'Env Compare: .env vs .env.example',
         '',
-        'Missing from .env (present in .env.example) (2)',
+        'Missing from .env, present in .env.example (2)',
         '  DATABASE_URL',
         '  REDIS_URL',
         '',
-        'Extra in .env (not in .env.example) (1)',
+        'Extra in .env, not in .env.example (1)',
         '  OLD_KEY',
         '',
         'Empty in .env (1)',
@@ -85,7 +85,7 @@ describe('formatReport', () => {
     const text = formatReport('.env', '.env.template', result({ extra: ['A'] }));
     expect(text).not.toContain('Missing');
     expect(text).not.toContain('Empty');
-    expect(text).toContain('Extra in .env (not in .env.template) (1)');
+    expect(text).toContain('Extra in .env, not in .env.template (1)');
   });
 
   it('still lists duplicates when the comparison is clean', () => {

@@ -19,8 +19,8 @@ export function formatSummary(result: CompareResult): string {
 export function formatReport(envName: string, templateName: string, result: CompareResult): string {
   const sections = [`Env Compare: ${envName} vs ${templateName}`];
 
-  addSection(sections, `Missing from ${envName} (present in ${templateName})`, result.missing);
-  addSection(sections, `Extra in ${envName} (not in ${templateName})`, result.extra);
+  addSection(sections, `Missing from ${envName}, present in ${templateName}`, result.missing);
+  addSection(sections, `Extra in ${envName}, not in ${templateName}`, result.extra);
   addSection(sections, `Empty in ${envName}`, result.empty);
 
   const duplicates: string[] = [];
