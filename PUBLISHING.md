@@ -1,73 +1,58 @@
-# Packaging and publishing
+# Publishing EnvLens
 
-Notes for packaging EnvLens with `vsce` and publishing it to the VS Code Marketplace. This file is excluded from the packaged extension.
-
-## One-time setup
-
-1. Sign in at https://dev.azure.com with a Microsoft account and create an organization if you have none.
-2. Create a Personal Access Token there:
-   - Organization: all accessible organizations
-   - Scope: Marketplace, Manage
-   - Copy the token and keep it private. Never commit it.
-3. Create a publisher at https://marketplace.visualstudio.com/manage. The publisher ID is permanent and appears in the extension URL.
-4. Set `publisher` in `package.json` to that ID. For this project it is `venkatarohithpesala`.
-5. Log in once:
-
-```
-npx vsce login <publisher-id>
-```
+Notes for releasing to the VS Code Marketplace. This file is not included in the extension package.
 
 ## Before every release
 
-- Update `version` in `package.json` and add an entry to `CHANGELOG.md`.
-- Run `npm test`, `npm run typecheck`, and `npm audit`.
-- The README uses `images/demo.gif`. When packaging, vsce rewrites relative image links to your GitHub repository, so the file must be pushed to the public repo first. The GIF itself is left out of the package by `.vscodeignore`.
-- Add a 128 by 128 PNG icon (for example `images/icon.png`), then add `"icon": "images/icon.png"` to `package.json`.
-- Confirm no secrets or real env files are in the repository.
+1. Set the new `version` in `package.json` and add an entry to `CHANGELOG.md`.
+2. Run the checks:
 
-## Package
+```
+npm test
+npm run typecheck
+npm run build
+```
+
+3. Push everything to GitHub first. The README images load from the repository.
+
+## Build the package
 
 ```
 npm run vsce:package
 ```
 
-This runs the production build (`vscode:prepublish`) and creates `envlens-<version>.vsix`.
-
-Check what goes into the package:
+This creates `envlens-<version>.vsix`. To see what goes inside:
 
 ```
 npx vsce ls
 ```
 
-Only `dist/extension.js`, `package.json`, `README.md`, `CHANGELOG.md`, and `LICENSE` should be listed.
+You should only see `dist/extension.js`, `package.json`, `README.md`, `CHANGELOG.md`, `LICENSE`, and `images/icon.png`.
 
-Test the package locally:
+## Test the package
+
+In VS Code, open the Extensions panel, click the `...` menu, choose **Install from VSIX**, and pick the file. Open a folder with an env file and a template, run **EnvLens: Compare .env with template**, then uninstall it.
+
+## First release: upload in the browser
+
+1. Open https://marketplace.visualstudio.com/manage and select the publisher `venkatarohithpesala`.
+2. Click **New extension**, then **Visual Studio Code**.
+3. Upload the `.vsix` file.
+
+## Later releases: command line
+
+1. Create a Personal Access Token at https://dev.azure.com with the scope **Marketplace, Manage** and access to all organizations. Never commit it or share it.
+2. Log in once and publish:
 
 ```
-code --install-extension envlens-0.1.0.vsix
-```
-
-Open a folder with an env file and a template, run **EnvLens: Compare .env with template**, then uninstall it from the Extensions view.
-
-## Publish
-
-```
+npx vsce login venkatarohithpesala
 npx vsce publish
 ```
 
-To bump the version and publish in one step:
+To raise the version and publish in one step, use `npx vsce publish patch`.
 
-```
-npx vsce publish patch
-```
+## Notes
 
-The extension usually appears on the Marketplace within a few minutes, after an automated verification.
-
-## Updating
-
-Bump the version, update the changelog, and run `npx vsce publish` again. A version number cannot be reused once published.
-
-## Optional later
-
-- Publish to Open VSX (for VSCodium and other editors) with `npx ovsx publish`.
-- Add a GitHub Actions workflow that runs the tests on every push.
+- The extension ID `venkatarohithpesala.envlens` is permanent.
+- A published version number cannot be reused.
+- The publisher can verify a domain from its Marketplace page. This is optional.
