@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/venkatarohithpesala/envdiff-vscode.git"
+    "url": "https://github.com/venkatarohithpesala/env-compare.git"
   },
   "bugs": {
-    "url": "https://github.com/venkatarohithpesala/envdiff-vscode/issues"
+    "url": "https://github.com/venkatarohithpesala/env-compare/issues"
   },
-  "homepage": "https://github.com/venkatarohithpesala/envdiff-vscode#readme",
+  "homepage": "https://github.com/venkatarohithpesala/env-compare#readme",
   "engines": {
     "vscode": "^1.85.0"
   },
