@@ -3,7 +3,7 @@
   "displayName": "Env Compare",
   "description": "Compare a .env file with its template and see missing, extra, and empty keys.",
   "version": "0.1.0",
-  "publisher": "your-publisher-id",
+  "publisher": "venkatarohithpesala",
   "license": "MIT",
   "icon": "images/icon.png",
   "repository": {
