@@ -1,19 +1,19 @@
 {
-  "name": "env-compare",
-  "displayName": "Env Compare",
-  "description": "Compare a .env file with its template and see missing, extra, and empty keys.",
+  "name": "envlens",
+  "displayName": "EnvLens",
+  "description": "Inspect .env files. Compare a .env with its template and see missing, extra, and empty keys.",
   "version": "0.1.0",
   "publisher": "venkatarohithpesala",
   "license": "MIT",
   "icon": "images/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/venkatarohithpesala/env-compare.git"
+    "url": "https://github.com/venkatarohithpesala/envlens.git"
   },
   "bugs": {
-    "url": "https://github.com/venkatarohithpesala/env-compare/issues"
+    "url": "https://github.com/venkatarohithpesala/envlens/issues"
   },
-  "homepage": "https://github.com/venkatarohithpesala/env-compare#readme",
+  "homepage": "https://github.com/venkatarohithpesala/envlens#readme",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -31,22 +31,22 @@
   "contributes": {
     "commands": [
       {
-        "command": "envCompare.compare",
+        "command": "envlens.compare",
         "title": "Compare .env with template",
-        "category": "Env Compare"
+        "category": "EnvLens"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "envCompare.compare",
+          "command": "envlens.compare",
           "when": "resourceFilename =~ /^\\.env(\\.local|\\.template|\\.example|\\.sample)?$/",
           "group": "navigation@100"
         }
       ],
       "editor/context": [
         {
-          "command": "envCompare.compare",
+          "command": "envlens.compare",
           "when": "resourceFilename =~ /^\\.env(\\.local|\\.template|\\.example|\\.sample)?$/",
           "group": "navigation@100"
         }

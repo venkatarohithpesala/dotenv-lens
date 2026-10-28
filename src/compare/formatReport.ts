@@ -17,7 +17,7 @@ export function formatSummary(result: CompareResult): string {
 }
 
 export function formatReport(envName: string, templateName: string, result: CompareResult): string {
-  const sections = [`Env Compare: ${envName} vs ${templateName}`];
+  const sections = [`EnvLens: ${envName} vs ${templateName}`];
 
   addSection(sections, `Missing from ${envName}, present in ${templateName}`, result.missing);
   addSection(sections, `Extra in ${envName}, not in ${templateName}`, result.extra);

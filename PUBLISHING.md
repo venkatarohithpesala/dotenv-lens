@@ -1,6 +1,6 @@
 # Packaging and publishing
 
-Notes for packaging Env Compare with `vsce` and publishing it to the VS Code Marketplace. This file is excluded from the packaged extension.
+Notes for packaging EnvLens with `vsce` and publishing it to the VS Code Marketplace. This file is excluded from the packaged extension.
 
 ## One-time setup
 
@@ -10,7 +10,7 @@ Notes for packaging Env Compare with `vsce` and publishing it to the VS Code Mar
    - Scope: Marketplace, Manage
    - Copy the token and keep it private. Never commit it.
 3. Create a publisher at https://marketplace.visualstudio.com/manage. The publisher ID is permanent and appears in the extension URL.
-4. Set `publisher` in `package.json` to that ID (it is currently the placeholder `your-publisher-id`).
+4. Set `publisher` in `package.json` to that ID. For this project it is `venkatarohithpesala`.
 5. Log in once:
 
 ```
@@ -31,7 +31,7 @@ npx vsce login <publisher-id>
 npm run vsce:package
 ```
 
-This runs the production build (`vscode:prepublish`) and creates `env-compare-<version>.vsix`.
+This runs the production build (`vscode:prepublish`) and creates `envlens-<version>.vsix`.
 
 Check what goes into the package:
 
@@ -44,10 +44,10 @@ Only `dist/extension.js`, `package.json`, `README.md`, `CHANGELOG.md`, and `LICE
 Test the package locally:
 
 ```
-code --install-extension env-compare-0.1.0.vsix
+code --install-extension envlens-0.1.0.vsix
 ```
 
-Open a folder with an env file and a template, run **Env Compare: Compare .env with template**, then uninstall it from the Extensions view.
+Open a folder with an env file and a template, run **EnvLens: Compare .env with template**, then uninstall it from the Extensions view.
 
 ## Publish
 
