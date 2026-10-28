@@ -18,10 +18,11 @@ Only key names appear in the report. Values are never printed.
 ## How to use
 
 1. Open a folder that contains your env file and a template in its root.
-2. Open the command palette (Ctrl+Shift+P, or Cmd+Shift+P on macOS).
-3. Run **Env Compare: Compare .env with template**.
-4. If more than one candidate file exists, pick the one you want from the list.
-5. Read the report in the **Env Compare** output channel. A short summary also appears as a notification.
+2. Open the command palette (Ctrl+Shift+P, or Cmd+Shift+P on macOS) and run **Env Compare: Compare .env with template**.
+3. If more than one candidate file exists, pick the one you want from the list.
+4. Read the report in the **Env Compare** output channel. A short summary also appears as a notification.
+
+You can also right-click an env or template file, in the Explorer or inside the editor, and choose **Env Compare: Compare .env with template**. The file you clicked is used as one side of the comparison, and the other side is found in the same folder.
 
 Example report:
 
@@ -44,7 +45,7 @@ Duplicate keys (last value wins)
 
 ## Files it looks for
 
-The extension only looks in the workspace root.
+From the command palette the extension only looks in the workspace root. From the right-click menu it looks in the folder of the file you clicked.
 
 | Role | File names |
 | --- | --- |
