@@ -1,8 +1,8 @@
 {
   "name": "dotenv-lens",
   "displayName": "DotEnv Lens",
-  "description": "Inspect .env files. Compare a .env with its template and see missing, extra, and empty keys.",
-  "version": "0.1.0",
+  "description": "Inspect .env files. Compare a .env with its template, and hover over process.env to see values.",
+  "version": "0.2.0",
   "publisher": "venkatarohithpesala",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -24,11 +24,28 @@
     "env",
     "dotenv",
     "compare",
-    "diff"
+    "diff",
+    "hover",
+    "process.env"
   ],
   "main": "./dist/extension.js",
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact"
+  ],
   "contributes": {
+    "configuration": {
+      "title": "DotEnv Lens",
+      "properties": {
+        "dotenvlens.maskSecrets": {
+          "type": "boolean",
+          "default": false,
+          "description": "Mask the values of secret-looking keys (KEY, SECRET, TOKEN, PASSWORD) and passwords inside connection URLs when hovering over process.env. Useful when sharing your screen."
+        }
+      }
+    },
     "commands": [
       {
         "command": "dotenvlens.compare",
