@@ -1,4 +1,4 @@
-# Publishing EnvLens
+# Publishing DotEnv Lens
 
 Notes for releasing to the VS Code Marketplace. This file is not included in the extension package.
 
@@ -21,7 +21,7 @@ npm run build
 npm run vsce:package
 ```
 
-This creates `envlens-<version>.vsix`. To see what goes inside:
+This creates `dotenv-lens-<version>.vsix`. To see what goes inside:
 
 ```
 npx vsce ls
@@ -31,7 +31,7 @@ You should only see `dist/extension.js`, `package.json`, `README.md`, `CHANGELOG
 
 ## Test the package
 
-In VS Code, open the Extensions panel, click the `...` menu, choose **Install from VSIX**, and pick the file. Open a folder with an env file and a template, run **EnvLens: Compare .env with template**, then uninstall it.
+In VS Code, open the Extensions panel, click the `...` menu, choose **Install from VSIX**, and pick the file. Open a folder with an env file and a template, run **DotEnv Lens: Compare .env with template**, then uninstall it.
 
 ## First release: upload in the browser
 
@@ -53,6 +53,6 @@ To raise the version and publish in one step, use `npx vsce publish patch`.
 
 ## Notes
 
-- The extension ID `venkatarohithpesala.envlens` is permanent.
+- The extension ID `venkatarohithpesala.dotenv-lens` is permanent.
 - A published version number cannot be reused.
 - The publisher can verify a domain from its Marketplace page. This is optional.

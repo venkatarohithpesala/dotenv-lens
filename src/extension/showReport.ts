@@ -12,7 +12,7 @@ export function showReport(
   output.appendLine(formatReport(envName, templateName, result));
   output.show(true);
 
-  const message = `EnvLens: ${formatSummary(result)}`;
+  const message = `DotEnv Lens: ${formatSummary(result)}`;
   if (isClean(result)) {
     void vscode.window.showInformationMessage(message);
   } else {

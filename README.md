@@ -1,8 +1,8 @@
-# EnvLens
+# DotEnv Lens
 
-See what is wrong with your `.env` file in one click. EnvLens compares it with your template and shows missing, extra, and empty keys.
+See what is wrong with your `.env` file in one click. DotEnv Lens compares it with your template and shows missing, extra, and empty keys.
 
-![EnvLens demo](images/demo.gif)
+![DotEnv Lens demo](images/demo.gif)
 
 ## What it reports
 
@@ -17,13 +17,13 @@ Only key names are shown. Values are never printed.
 
 Open a folder that has a `.env` file and a template, then do one of these:
 
-- Press Ctrl+Shift+P (Cmd+Shift+P on macOS) and run **EnvLens: Compare .env with template**.
-- Right-click an env or template file and choose **EnvLens: Compare .env with template**.
+- Press Ctrl+Shift+P (Cmd+Shift+P on macOS) and run **DotEnv Lens: Compare .env with template**.
+- Right-click an env or template file and choose **DotEnv Lens: Compare .env with template**.
 
-The report opens in the **EnvLens** output panel.
+The report opens in the **DotEnv Lens** output panel.
 
 ```
-EnvLens: .env vs .env.example
+DotEnv Lens: .env vs .env.example
 
 Missing from .env, present in .env.example (2)
   REDIS_URL

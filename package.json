@@ -1,6 +1,6 @@
 {
-  "name": "envlens",
-  "displayName": "EnvLens",
+  "name": "dotenv-lens",
+  "displayName": "DotEnv Lens",
   "description": "Inspect .env files. Compare a .env with its template and see missing, extra, and empty keys.",
   "version": "0.1.0",
   "publisher": "venkatarohithpesala",
@@ -8,12 +8,12 @@
   "icon": "images/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/venkatarohithpesala/envlens.git"
+    "url": "https://github.com/venkatarohithpesala/dotenv-lens.git"
   },
   "bugs": {
-    "url": "https://github.com/venkatarohithpesala/envlens/issues"
+    "url": "https://github.com/venkatarohithpesala/dotenv-lens/issues"
   },
-  "homepage": "https://github.com/venkatarohithpesala/envlens#readme",
+  "homepage": "https://github.com/venkatarohithpesala/dotenv-lens#readme",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -31,22 +31,22 @@
   "contributes": {
     "commands": [
       {
-        "command": "envlens.compare",
+        "command": "dotenvlens.compare",
         "title": "Compare .env with template",
-        "category": "EnvLens"
+        "category": "DotEnv Lens"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "envlens.compare",
+          "command": "dotenvlens.compare",
           "when": "resourceFilename =~ /^\\.env(\\.local|\\.template|\\.example|\\.sample)?$/",
           "group": "navigation@100"
         }
       ],
       "editor/context": [
         {
-          "command": "envlens.compare",
+          "command": "dotenvlens.compare",
           "when": "resourceFilename =~ /^\\.env(\\.local|\\.template|\\.example|\\.sample)?$/",
           "group": "navigation@100"
         }

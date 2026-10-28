@@ -6,8 +6,8 @@ import { findExistingFiles, pickFile, readText } from './findEnvFiles';
 import { showReport } from './showReport';
 
 export function activate(context: vscode.ExtensionContext): void {
-  const output = vscode.window.createOutputChannel('EnvLens');
-  const command = vscode.commands.registerCommand('envlens.compare', (resource?: vscode.Uri) =>
+  const output = vscode.window.createOutputChannel('DotEnv Lens');
+  const command = vscode.commands.registerCommand('dotenvlens.compare', (resource?: vscode.Uri) =>
     runCompare(output, resource),
   );
   context.subscriptions.push(output, command);
@@ -20,7 +20,7 @@ async function runCompare(output: vscode.OutputChannel, resource?: vscode.Uri): 
     ? vscode.Uri.joinPath(resource, '..')
     : vscode.workspace.workspaceFolders?.[0]?.uri;
   if (!root) {
-    void vscode.window.showErrorMessage('EnvLens: open a folder first.');
+    void vscode.window.showErrorMessage('DotEnv Lens: open a folder first.');
     return;
   }
 
@@ -37,13 +37,13 @@ async function runCompare(output: vscode.OutputChannel, resource?: vscode.Uri): 
 
   if (envNames.length === 0) {
     void vscode.window.showWarningMessage(
-      `EnvLens: no env file found in ${where} (looked for ${ENV_FILE_NAMES.join(', ')}).`,
+      `DotEnv Lens: no env file found in ${where} (looked for ${ENV_FILE_NAMES.join(', ')}).`,
     );
     return;
   }
   if (templateNames.length === 0) {
     void vscode.window.showWarningMessage(
-      `EnvLens: no template file found in ${where} (looked for ${TEMPLATE_FILE_NAMES.join(', ')}).`,
+      `DotEnv Lens: no template file found in ${where} (looked for ${TEMPLATE_FILE_NAMES.join(', ')}).`,
     );
     return;
   }
@@ -66,6 +66,6 @@ async function runCompare(output: vscode.OutputChannel, resource?: vscode.Uri): 
     showReport(output, envName, templateName, result);
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
-    void vscode.window.showErrorMessage(`EnvLens: ${reason}`);
+    void vscode.window.showErrorMessage(`DotEnv Lens: ${reason}`);
   }
 }

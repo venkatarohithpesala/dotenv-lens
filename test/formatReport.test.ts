@@ -56,7 +56,7 @@ describe('formatReport', () => {
 
     expect(text).toBe(
       [
-        'EnvLens: .env vs .env.example',
+        'DotEnv Lens: .env vs .env.example',
         '',
         'Missing from .env, present in .env.example (2)',
         '  DATABASE_URL',
@@ -77,7 +77,7 @@ describe('formatReport', () => {
 
   it('says so when nothing differs', () => {
     expect(formatReport('.env', '.env.template', result())).toBe(
-      'EnvLens: .env vs .env.template\n\nNo missing, extra, or empty keys.',
+      'DotEnv Lens: .env vs .env.template\n\nNo missing, extra, or empty keys.',
     );
   });
 
