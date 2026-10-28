@@ -2,7 +2,7 @@
 
 Compare a `.env` file with its template and see which keys are missing, extra, or empty, without leaving VS Code.
 
-> Screenshot placeholder: add a screenshot or GIF of the report here before publishing (see PUBLISHING.md).
+![Env Compare demo](images/demo.gif)
 
 ## What it does
 

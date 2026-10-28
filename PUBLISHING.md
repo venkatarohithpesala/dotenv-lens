@@ -21,7 +21,7 @@ npx vsce login <publisher-id>
 
 - Update `version` in `package.json` and add an entry to `CHANGELOG.md`.
 - Run `npm test`, `npm run typecheck`, and `npm audit`.
-- Replace the screenshot placeholder in `README.md` with a real image or GIF. The Marketplace only accepts image links that start with `https://`, so use a path in your public repository or a relative path that vsce can resolve through the `repository` field.
+- The README uses `images/demo.gif`. When packaging, vsce rewrites relative image links to your GitHub repository, so the file must be pushed to the public repo first. The GIF itself is left out of the package by `.vscodeignore`.
 - Add a 128 by 128 PNG icon (for example `images/icon.png`), then add `"icon": "images/icon.png"` to `package.json`.
 - Confirm no secrets or real env files are in the repository.
 
