@@ -1,8 +1,5 @@
 import * as vscode from 'vscode';
 
-export const ENV_FILE_NAMES = ['.env', '.env.local'];
-export const TEMPLATE_FILE_NAMES = ['.env.template', '.env.example', '.env.sample'];
-
 export async function findExistingFiles(root: vscode.Uri, names: string[]): Promise<string[]> {
   const flags = await Promise.all(names.map((name) => isFile(vscode.Uri.joinPath(root, name))));
   return names.filter((_, index) => flags[index]);

@@ -1,44 +1,49 @@
 import * as vscode from 'vscode';
 import { compareEnv } from '../compare/compareEnv';
+import { ENV_FILE_NAMES, TEMPLATE_FILE_NAMES, getFileRole } from '../compare/fileRoles';
 import { parseEnv } from '../parser/parseEnv';
-import {
-  ENV_FILE_NAMES,
-  TEMPLATE_FILE_NAMES,
-  findExistingFiles,
-  pickFile,
-  readText,
-} from './findEnvFiles';
+import { findExistingFiles, pickFile, readText } from './findEnvFiles';
 import { showReport } from './showReport';
 
 export function activate(context: vscode.ExtensionContext): void {
   const output = vscode.window.createOutputChannel('Env Compare');
-  const command = vscode.commands.registerCommand('envCompare.compare', () => runCompare(output));
+  const command = vscode.commands.registerCommand('envCompare.compare', (resource?: vscode.Uri) =>
+    runCompare(output, resource),
+  );
   context.subscriptions.push(output, command);
 }
 
 export function deactivate(): void {}
 
-async function runCompare(output: vscode.OutputChannel): Promise<void> {
-  const folder = vscode.workspace.workspaceFolders?.[0];
-  if (!folder) {
+async function runCompare(output: vscode.OutputChannel, resource?: vscode.Uri): Promise<void> {
+  const root = resource
+    ? vscode.Uri.joinPath(resource, '..')
+    : vscode.workspace.workspaceFolders?.[0]?.uri;
+  if (!root) {
     void vscode.window.showErrorMessage('Env Compare: open a folder first.');
     return;
   }
 
-  const [envNames, templateNames] = await Promise.all([
-    findExistingFiles(folder.uri, ENV_FILE_NAMES),
-    findExistingFiles(folder.uri, TEMPLATE_FILE_NAMES),
+  const clickedName = resource ? (resource.path.split('/').pop() ?? '') : '';
+  const role = getFileRole(clickedName);
+  const where = resource ? 'the same folder' : 'the workspace root';
+
+  const [foundEnvNames, foundTemplateNames] = await Promise.all([
+    findExistingFiles(root, ENV_FILE_NAMES),
+    findExistingFiles(root, TEMPLATE_FILE_NAMES),
   ]);
+  const envNames = role === 'env' ? [clickedName] : foundEnvNames;
+  const templateNames = role === 'template' ? [clickedName] : foundTemplateNames;
 
   if (envNames.length === 0) {
     void vscode.window.showWarningMessage(
-      `Env Compare: no env file found in the workspace root (looked for ${ENV_FILE_NAMES.join(', ')}).`,
+      `Env Compare: no env file found in ${where} (looked for ${ENV_FILE_NAMES.join(', ')}).`,
     );
     return;
   }
   if (templateNames.length === 0) {
     void vscode.window.showWarningMessage(
-      `Env Compare: no template file found in the workspace root (looked for ${TEMPLATE_FILE_NAMES.join(', ')}).`,
+      `Env Compare: no template file found in ${where} (looked for ${TEMPLATE_FILE_NAMES.join(', ')}).`,
     );
     return;
   }
@@ -54,8 +59,8 @@ async function runCompare(output: vscode.OutputChannel): Promise<void> {
 
   try {
     const [envText, templateText] = await Promise.all([
-      readText(folder.uri, envName),
-      readText(folder.uri, templateName),
+      readText(root, envName),
+      readText(root, templateName),
     ]);
     const result = compareEnv(parseEnv(envText), parseEnv(templateText));
     showReport(output, envName, templateName, result);

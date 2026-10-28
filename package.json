@@ -34,7 +34,23 @@
         "title": "Compare .env with template",
         "category": "Env Compare"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "envCompare.compare",
+          "when": "resourceFilename =~ /^\\.env(\\.local|\\.template|\\.example|\\.sample)?$/",
+          "group": "navigation@100"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "envCompare.compare",
+          "when": "resourceFilename =~ /^\\.env(\\.local|\\.template|\\.example|\\.sample)?$/",
+          "group": "navigation@100"
+        }
+      ]
+    }
   },
   "scripts": {
     "build": "node esbuild.js",
