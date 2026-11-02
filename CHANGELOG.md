@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 - Unreleased
+## 0.2.0 - 2026-11-02
 
 - Add a hover for `process.env.NAME`, `process.env['NAME']`, and `process.env["NAME"]` in JavaScript and TypeScript files. It shows the value and the file it came from, reading `.env.local` first, then `.env`.
 - Show the value as a highlighted `KEY=value` block under a DotEnv Lens header.
