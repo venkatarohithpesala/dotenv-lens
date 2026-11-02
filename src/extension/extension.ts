@@ -2,7 +2,9 @@ import * as vscode from 'vscode';
 import { compareEnv } from '../compare/compareEnv';
 import { ENV_FILE_NAMES, TEMPLATE_FILE_NAMES, getFileRole } from '../compare/fileRoles';
 import { parseEnv } from '../parser/parseEnv';
+import { EnvStore } from './envStore';
 import { findExistingFiles, pickFile, readText } from './findEnvFiles';
+import { registerEnvHover } from './hoverProvider';
 import { showReport } from './showReport';
 
 export function activate(context: vscode.ExtensionContext): void {
@@ -11,6 +13,13 @@ export function activate(context: vscode.ExtensionContext): void {
     runCompare(output, resource),
   );
   context.subscriptions.push(output, command);
+
+  const folder = vscode.workspace.workspaceFolders?.[0];
+  if (folder) {
+    const store = new EnvStore(folder.uri);
+    void store.load();
+    context.subscriptions.push(store, registerEnvHover(store));
+  }
 }
 
 export function deactivate(): void {}
